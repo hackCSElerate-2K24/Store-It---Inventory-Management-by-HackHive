@@ -33,6 +33,6 @@ A user-friendly home page, login page, signup page, inventory dashboard, barcode
 - Sonu, Siri and Suchitra - Worked on Frontend
 - Jewel - Worked on Backend and Barcode Scanner
 
-Acknowledgments
+## Acknowledgments
 - Angela Yu's 100 Days of Python Bootcamp on Udemy
 - [Barcode Reader by Mr. Lazy Programmer](https://www.youtube.com/watch?v=pAnBDKl7uuo)
