@@ -1,0 +1,88 @@
+   body {
+      background-color: #212121;
+      color: white;
+    }
+
+    .gradient-background {
+      background: linear-gradient(300deg, darkviolet, #c1ffff, #ffa3e8);
+      background-size: 180% 180%;
+      animation: gradient-animation 18s ease infinite;
+    }
+
+    @keyframes gradient-animation {
+      0% {
+      background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    /* Navbar styling */
+    .navbar {
+      background-color: black;
+      padding-left: 10px;
+    }
+
+    /* Button Style */
+    .btn-light,
+    .btn-info {
+      color: #ffffff;
+      background-color: #17a2b8;
+      border-color: #17a2b8;
+    }
+
+    .btn-light:hover,
+    .btn-info:hover {
+      background-color: #138496;
+      border-color: #138496;
+    }
+    #features {
+      background-color: #212121;
+    }
+
+    .icon-square {
+      color: #17a2b8;
+      font-size: 1.5rem;
+    }
+#typed-out{
+  overflow: hidden;
+  border-right: .15em solid yellow;
+  white-space: nowrap;
+  animation: typing 2.5s forwards;
+  font-size: 3rem;
+  width: 0;
+}
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+    footer {
+      background-color: #343a40;
+    }
+
+    footer a {
+      color: #ffffff;
+    }
+
+    footer a:hover {
+      color: #17a2b8;
+    }
+
+    footer p {
+      font-size: 0.9rem;
+      margin-top: 15px;
+    }
+
+    footer .fab {
+      color: #ffffff;
+      font-size: 1.5rem;
+      transition: color 0.3s ease;
+    }
+
+    footer .fab:hover {
+      color: #17a2b8;
+    }

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Barcode Scanner{% endblock %}
+
+{% block content %}
+<div class="container scanner-container">
+    <h2 class="text-center mb-4">Live Barcode Scanner</h2>
+    <div class="text-center">
+        <img alt="Video Feed" class="img-fluid border rounded" src="{{ url_for('video_feed') }}" width="100%">
+    </div>
+
+    <div class="mt-4 p-3 bg-dark border rounded d-flex align-items-center justify-content-between" id="scanned-barcode">
+        <div class="barcode-display">
+            <strong>Scanned Barcode:</strong> <span class="text-primary" id="barcode-display"></span>
+        </div>
+        <button class="btn btn-primary ms-3" id="copy-btn" onclick="copyBarcode()">Copy Barcode</button>
+    </div>
+</div>
+
+<script>
+    const barcodeDisplayElement = document.getElementById('barcode-display');
+    const copyBtn = document.getElementById('copy-btn');
+    const eventSource = new EventSource('/barcode_feed');
+
+    eventSource.onmessage = function(event) {
+        const barcode = event.data;
+        if (barcode) {
+            barcodeDisplayElement.textContent = barcode;
+        }
+    };
+
+    function copyBarcode() {
+        const barcode = barcodeDisplayElement.textContent;
+        if (barcode) {
+            navigator.clipboard.writeText(barcode)
+                .then(() => {
+                    alert('Barcode copied to clipboard!');
+                })
+                .catch(err => {
+                    console.error('Failed to copy text: ', err);
+                });
+        }
+    }
+</script>
+{% endblock %}

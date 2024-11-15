@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Add Item{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Add New Item</h2>
+    <div class="row">
+    <div class="col-md-6">
+        <form action="{{ url_for('add_item_view') }}" method="post">
+            <div class="mb-3">
+                <label for="barcode" class="form-label">Barcode:</label>
+                <input type="text" class="form-control" id="barcode" name="barcode" required>
+            </div>
+            <div class="mb-3">
+                <label for="item_name" class="form-label">Name:</label>
+                <input type="text" class="form-control" id="item_name" name="item_name" required>
+            </div>
+            <div class="mb-3">
+                <label for="item_category" class="form-label">Category:</label>
+                <input type="text" class="form-control" id="item_category" name="item_category">
+            </div>
+            <div class="mb-3">
+                <label for="item_cost" class="form-label">Cost:</label>
+                <input type="number" class="form-control" id="item_cost" name="item_cost" step="0.01">
+            </div>
+            <div class="mb-3">
+                <label for="stock" class="form-label">Stock:</label>
+                <input type="number" class="form-control" id="stock" name="stock" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Item</button>
+            <a href="{{ url_for('user_dashboard') }}" class="btn btn-secondary ms-2">Cancel</a>
+        </form>
+    </div>
+
+    <div class="col-md-6 scanner-container">
+        <h2 class="text-center mb-4">Live Barcode Scanner</h2>
+        <div class="text-center">
+            <img id="video" src="{{ url_for('video_feed') }}" class="img-fluid border rounded" width="100%"
+                 alt="Video Feed">
+        </div>
+
+        <div id="scanned-barcode"
+             class="mt-4 p-3 bg-dark border rounded d-flex align-items-center justify-content-between">
+            <div class="barcode-display">
+                <strong>Scanned Barcode:</strong> <span id="barcode-display" class="text-primary"></span>
+            </div>
+            <button id="copy-btn" class="btn btn-primary ms-3" onclick="copyBarcode()">Copy Barcode</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+    const barcodeInputElement = document.getElementById('barcode');
+    const barcodeDisplayElement = document.getElementById('barcode-display');
+    const copyBtn = document.getElementById('copy-btn');
+
+    const eventSource = new EventSource('/barcode_feed');
+
+eventSource.onmessage = function(event) {
+    const barcode = event.data.trim(); // Clean up any stray whitespace
+    if (barcode) {
+        barcodeInputElement.value = barcode; // Update the hidden input
+        barcodeDisplayElement.textContent = barcode; // Update the visual display
+    }
+};
+
+    function copyBarcode() {
+        const barcode = barcodeInputElement.value;
+        if (barcode) {
+            navigator.clipboard.writeText(barcode)
+                .then(() => {
+                    alert('Barcode copied to clipboard!');
+                })
+                .catch(err => {
+                    console.error('Failed to copy text: ', err);
+                });
+        }
+    }
+</script>
+{% endblock %}

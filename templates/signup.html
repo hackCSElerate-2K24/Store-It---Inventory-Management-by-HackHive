@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card border-0 shadow-lg">
+                <div class="row g-0">
+                    <div class="col-md-6 d-flex align-items-center bg-light">
+                        <img alt="img" class="img-fluid mx-auto d-block"
+                             src="{{ url_for('static', filename='images/signup.png') }}" style="height: 300px; width: 300px;">
+                    </div>
+
+                    <div class="col-md-6 p-4">
+                        <h2 class="text-center mb-4">Sign Up</h2>
+                        <form action="#" method="POST">
+                            <div class="mb-3">
+                                <label class="form-label" for="username">Username</label>
+                                <input class="form-control" id="username" name="username" placeholder="Enter your username"
+                                       required type="text">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="email">Email</label>
+                                <input class="form-control" id="email" name="email" pattern=".+@.+\..+"
+                                       placeholder="Enter your email" required type="email">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="phone_num">Phone Number</label>
+                                <input class="form-control" id="phone_num" name="phone_num" pattern="^\+?\d{10,15}$"
+                                       placeholder="Enter your phone number" required type="tel">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="password">Password</label>
+                                <input class="form-control" id="password" name="password" placeholder="Enter your password"
+                                       required type="password">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="confirm-password">Confirm Password</label>
+                                <input class="form-control" id="confirm-password" name="confirm_password"
+                                       placeholder="Confirm your password" required type="password">
+                            </div>
+
+                            <div class="d-grid mt-4">
+                                <button class="btn btn-primary" type="submit">Sign Up</button>
+                            </div>
+                        </form>
+
+                        <div class="text-center mt-3">
+                            <p>Already have an account? <a class="text-info" href="{{ url_for('login') }}">Login
+                                here</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+    #btn {
+      background-color: blueviolet;
+    }
+</style>
+{% endblock %}

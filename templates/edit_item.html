@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Item{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Edit Item</h2>
+    <form action="{{ url_for('edit_item', barcode=item['itemBarcode']) }}" method="post">
+        <div class="mb-3">
+            <label class="form-label" for="barcode">Barcode:</label>
+            <input class="form-control" id="barcode" name="barcode" readonly required
+                   type="text" value="{{ item['itemBarcode'] }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="item_name">Name:</label>
+            <input class="form-control" id="item_name" name="item_name" required type="text"
+                   value="{{ item['itemName'] }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="item_category">Category:</label>
+            <input class="form-control" id="item_category" name="item_category" type="text"
+                   value="{{ item['itemCategory'] }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="item_cost">Cost:</label>
+            <input class="form-control" id="item_cost" name="item_cost" required step="0.01"
+                   type="number" value="{{ item['itemCost'] }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="stock">Stock:</label>
+            <input class="form-control" id="stock" name="stock" required type="number" value="{{ item['itemStock'] }}">
+        </div>
+
+        <button class="btn btn-primary" type="submit">Save Changes</button>
+        <a class="btn btn-secondary ms-2" href="{{ url_for('user_dashboard') }}">Cancel</a>
+    </form>
+</div>
+{% endblock %}
